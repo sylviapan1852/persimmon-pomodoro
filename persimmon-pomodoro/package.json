@@ -1,7 +1,8 @@
 {
   "name": "my-threejs-app",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://your-username.github.io/your-repo-name",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
