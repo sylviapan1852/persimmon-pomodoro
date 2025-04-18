@@ -37,7 +37,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache-dependency-path: /persimmon-pomodoro/package-lock.json
+          cache-dependency-path: persimmon-pomodoro/persimmon-pomodoro/package-lock.json
           node-version: "20"
           cache: "npm"
 
