@@ -96,13 +96,25 @@ export default function Home() {
   const [animate, setAnimate] = useState(false);
   const [reset, setReset] = useState(false);
   const [resetDuration, setResetDuration] = useState(30); // Default to 30 minutes
+  const [activeButton, setActiveButton] = useState(null);
+  const durations = [5, 15, 30];
+
 
   const handleClick = (minutes) => {
     setResetDuration(minutes); // Set the duration for reset based on the selected button
     setAnimate(true);
+    setActiveButton(minutes);
+    setReset(false);
     setTimeout(() => {
-      setReset(true); // Start resetting after initial animation
-    }, 2000); // Wait for the initial 2-second animation to complete before starting reset
+      setReset(true);     // Start the reset after animation
+      setAnimate(false);  // Clear animate so it can be triggered again later
+  
+      setTimeout(() => {
+        setReset(false);       // Clear reset to allow retriggering
+        setActiveButton(null); // Unhighlight the button
+      }, minutes * 60 * 1000);  // Wait for full duration of the timer
+    }, 2000);
+    
   };
 
   return (
@@ -111,10 +123,10 @@ export default function Home() {
       <div
         style={{
           position: "absolute",
-          top: "20px",
+          top: "20%",
           width: "100%",
           textAlign: "center",
-          fontSize: "24px",
+          fontSize: "30px",
           fontWeight: "bold",
           color: "black",
           zIndex: 10,
@@ -128,44 +140,32 @@ export default function Home() {
       <div
         style={{
           position: "absolute",
-          bottom: "20px",
+          bottom: "20%",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 10,
         }}
       >
-        <button
-          onClick={() => handleClick(5)}
-          style={{
-            padding: "10px 20px",
-            fontSize: "18px",
-            margin: "5px",
-          }}
-        >
-          5
-        </button>
-        <button
-          onClick={() => handleClick(15)}
-          style={{
-            padding: "10px 20px",
-            fontSize: "18px",
-            margin: "5px",
-          }}
-        >
-          15
-        </button>
-        <button
-          onClick={() => handleClick(30)}
-          style={{
-            padding: "10px 20px",
-            fontSize: "18px",
-            margin: "5px",
-          }}
-        >
-          30
-        </button>
+        {durations.map((minutes) => (
+          <button
+            key={minutes}
+            onClick={() => handleClick(minutes)}
+            style={{
+              padding: "10px 20px",
+              fontSize: "25px",
+              fontWeight: "bold",
+              margin: "10px",
+              color: activeButton === minutes ? "#E79F51FF" : "black",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            {minutes}
+          </button>
+        ))}
       </div>
-
+      
       {/* 3D Canvas */}
       <Canvas camera={{ position: [0, 2, 5], fov: 50 }}>
         <ambientLight intensity={0.5} />
