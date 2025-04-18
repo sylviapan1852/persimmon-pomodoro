@@ -24,10 +24,6 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |  
-          cd ./
-          pwd
-          ls -l
-          ls -al persimmon-pomodoro
           if [ -f "${{ github.workspace }}/persimmon-pomodoro/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
@@ -42,6 +38,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Cache Node modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
 
       - name: Install dependencies
         working-directory: ./persimmon-pomodoro
