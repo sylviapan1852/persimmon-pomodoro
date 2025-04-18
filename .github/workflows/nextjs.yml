@@ -57,6 +57,11 @@ jobs:
         with:
           path: ./persimmon-pomodoro/out
 
+      - name: List output files
+        run: |
+          ls -R ./persimmon-pomodoro/out
+
+
   deploy:
     environment:
       name: github-pages
