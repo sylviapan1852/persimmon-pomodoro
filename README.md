@@ -5,6 +5,4 @@ but instead of a tomato-pomodoro (as it traditionally is), its a persimmon!
 because my favorite fruit is a persimmon :))
 
 Features
-- click drag timer, can configure num of minutes
-- description/task on hand
-- skip ahead button 
+- 5/15/30 for now, needs a timer-finished indicator
