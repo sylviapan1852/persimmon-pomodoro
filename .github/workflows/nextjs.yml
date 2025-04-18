@@ -42,11 +42,11 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        working-directory: ./persimmon-pomodoro
+        working-directory: ./persimmon-pomodoro/persimmon-pomodoro
         run: npm ci
 
       - name: Build and Export with Next.js
-        working-directory: ./persimmon-pomodoro
+        working-directory: ./persimmon-pomodoro/persimmon-pomodoro
         run: |
           npx next build
           npx next export
