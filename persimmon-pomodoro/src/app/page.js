@@ -6,7 +6,7 @@ import { OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
 function Model({ topRef, animate, reset, resetDuration }) {
-  const { scene } = useGLTF("/persimmon.glb");
+  const { scene } = useGLTF("/persimmon-pomodoro/persimmon.glb");
   const [topPart, setTopPart] = useState(null);
   const [bottomPart, setBottomPart] = useState(null);
 
