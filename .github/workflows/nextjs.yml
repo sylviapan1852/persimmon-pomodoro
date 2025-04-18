@@ -24,11 +24,7 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |   
-          cd persimmon-pomodoro
-          ls -a 
-          echo "GitHub workspace is: ${{ github.workspace }}"
-          ls -al ${{ github.workspace }}
-          if [ -f "${{ github.workspace }}/package.json" ]; then
+          if [ -f "${{ github.workspace }}/persimmon-pomodoro/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
