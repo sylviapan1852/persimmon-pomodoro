@@ -24,6 +24,9 @@ jobs:
       - name: Detect package manager
         id: detect-package-manager
         run: |  
+          cd ./
+          pwd
+          ls -l
           ls -al persimmon-pomodoro
           if [ -f "${{ github.workspace }}/persimmon-pomodoro/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
@@ -38,9 +41,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          cache-dependency-path: persimmon-pomodoro/persimmon-pomodoro/package-lock.json
           node-version: "20"
-          cache: "npm"
 
       - name: Install dependencies
         working-directory: ./persimmon-pomodoro/persimmon-pomodoro
