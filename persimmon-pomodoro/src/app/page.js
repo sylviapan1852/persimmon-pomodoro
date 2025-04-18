@@ -133,7 +133,7 @@ export default function Home() {
           pointerEvents: "none",
         }}
       >
-        sylp's persimmon pomodoro
+        a persimmon pomodoro
       </div>
 
       {/* Buttons */}
