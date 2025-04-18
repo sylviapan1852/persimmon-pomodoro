@@ -23,9 +23,9 @@ jobs:
 
       - name: Detect package manager
         id: detect-package-manager
-        run: |
-          ls -a    
+        run: |   
           cd persimmon-pomodoro
+          ls -a 
           if [ -f "${{ github.workspace }}/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
