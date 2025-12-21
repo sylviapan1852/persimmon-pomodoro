@@ -190,6 +190,8 @@ export default function Home() {
               borderRadius: "8px",
               zIndex: 11,
               boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+              fontFamily: "inherit",
+              color: "black",
             }}
           >
             <div style={{ fontSize: "14px", marginBottom: "6px", color: "#666" }}>
