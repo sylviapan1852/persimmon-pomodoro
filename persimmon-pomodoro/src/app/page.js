@@ -97,7 +97,9 @@ export default function Home() {
   const [reset, setReset] = useState(false);
   const [resetDuration, setResetDuration] = useState(30); // Default to 30 minutes
   const [activeButton, setActiveButton] = useState(null);
-  const durations = [5, 15, 30];
+  const [durations, setDurations] = useState([5, 15, 30]);
+  const [showSettings, setShowSettings] = useState(false);
+  const [durationInput, setDurationInput] = useState(durations.join(", "));
 
 
   const handleClick = (minutes) => {
@@ -144,6 +146,8 @@ export default function Home() {
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 10,
+          display: "flex",
+          alignItems: "center",
         }}
       >
         {durations.map((minutes) => (
@@ -156,15 +160,88 @@ export default function Home() {
               fontWeight: "bold",
               margin: "10px",
               color: activeButton === minutes ? "#E79F51FF" : "black",
+              background: "transparent",
               border: "none",
-              borderRadius: "5px",
               cursor: "pointer",
             }}
           >
             {minutes}
           </button>
         ))}
+
+        {showSettings && (
+          <div
+            style={{
+              position: "absolute",
+              bottom: "27%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              background: "#f5f5f5",
+              padding: "12px 16px",
+              borderRadius: "8px",
+              zIndex: 11,
+              boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+            }}
+          >
+            <div style={{ fontSize: "14px", marginBottom: "6px", color: "#666" }}>
+              Edit durations (minutes, comma-separated)
+            </div>
+
+            <input
+              value={durationInput}
+              onChange={(e) => setDurationInput(e.target.value)}
+              style={{
+                width: "200px",
+                padding: "6px",
+                fontSize: "14px",
+              }}
+            />
+
+            <div style={{ marginTop: "8px", textAlign: "right" }}>
+              <button
+                onClick={() => {
+                  const parsed = durationInput
+                    .split(",")
+                    .map((v) => parseInt(v.trim(), 10))
+                    .filter((v) => !isNaN(v) && v > 0);
+
+                  if (parsed.length) {
+                    setDurations(parsed);
+                    setShowSettings(false);
+                  }
+                }}
+                style={{
+                  fontSize: "14px",
+                  border: "none",
+                  background: "#ddd",
+                  padding: "4px 8px",
+                  cursor: "pointer",
+                }}
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        )}
+
+
+        {/* Cog button */}
+        <button
+          onClick={() => setShowSettings((v) => !v)}
+          style={{
+            marginLeft: "10px",
+            fontSize: "18px",
+            color: "#999",
+            background: "transparent",
+            border: "none",
+            cursor: "pointer",
+          }}
+          aria-label="Edit durations"
+        >
+          ⚙️
+        </button>
       </div>
+
       
       {/* 3D Canvas */}
       <Canvas camera={{ position: [0, 2, 5], fov: 50 }}>
