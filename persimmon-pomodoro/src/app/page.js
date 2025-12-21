@@ -100,6 +100,7 @@ export default function Home() {
   const [durations, setDurations] = useState([5, 15, 30]);
   const [showSettings, setShowSettings] = useState(false);
   const [durationInput, setDurationInput] = useState(durations.join(", "));
+  const [task, setTask] = useState("");
 
 
   const handleClick = (minutes) => {
@@ -249,6 +250,39 @@ export default function Home() {
         </button>
 
       </div>
+
+      {/* Task input */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "14%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 10,
+          width: "80%",
+          maxWidth: "400px",
+          textAlign: "center",
+        }}
+      >
+        <input
+          type="text"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          placeholder="What are you working on?"
+          style={{
+            width: "100%",
+            padding: "10px 14px",
+            fontSize: "18px",
+            textAlign: "center",
+            border: "none",
+            borderBottom: "2px solid #ddd",
+            outline: "none",
+            background: "transparent",
+            color: "black",
+          }}
+        />
+      </div>
+
 
       
       {/* 3D Canvas */}
