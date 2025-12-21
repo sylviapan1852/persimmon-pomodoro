@@ -121,6 +121,14 @@ export default function Home() {
   };
 
   return (
+    <>
+      <style jsx global>{`
+        [contenteditable][data-placeholder]:empty:before {
+          content: attr(data-placeholder);
+          color: #aaa;
+        }
+      `}</style>
+
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
       {/* Static Text Overlay */}
       <div
@@ -251,37 +259,29 @@ export default function Home() {
 
       </div>
 
-      {/* Task input */}
+      {/* Task text */}
       <div
+        contentEditable
+        suppressContentEditableWarning
+        onInput={(e) => setTask(e.currentTarget.textContent || "")}
         style={{
           position: "absolute",
           bottom: "14%",
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 10,
-          width: "80%",
-          maxWidth: "400px",
-          textAlign: "center",
+          fontSize: "25px",
+          fontWeight: "bold",
+          color: "black",
+          cursor: "text",
+          outline: "none",
+          whiteSpace: "nowrap",
         }}
+        data-placeholder="What are you working on?"
       >
-        <input
-          type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-          placeholder="What are you working on?"
-          style={{
-            width: "100%",
-            padding: "10px 14px",
-            fontSize: "18px",
-            textAlign: "center",
-            border: "none",
-            borderBottom: "2px solid #ddd",
-            outline: "none",
-            background: "transparent",
-            color: "black",
-          }}
-        />
+        {task}
       </div>
+
 
 
       
@@ -293,5 +293,6 @@ export default function Home() {
         <OrbitControls />
       </Canvas>
     </div>
-  );
+  
+    </>);
 }
