@@ -104,21 +104,45 @@ export default function Home() {
 
 
   const handleClick = (minutes) => {
-    setResetDuration(minutes); // Set the duration for reset based on the selected button
+    const totalSeconds = minutes * 60;
+
+    setRemainingSeconds(totalSeconds); // 👈 start countdown
+    setResetDuration(minutes);
     setAnimate(true);
     setActiveButton(minutes);
     setReset(false);
+
     setTimeout(() => {
-      setReset(true);     // Start the reset after animation
-      setAnimate(false);  // Clear animate so it can be triggered again later
-  
-      setTimeout(() => {
-        setReset(false);       // Clear reset to allow retriggering
-        setActiveButton(null); // Unhighlight the button
-      }, minutes * 60 * 1000);  // Wait for full duration of the timer
+      setReset(true);
+      setAnimate(false);
     }, 2000);
-    
   };
+
+  useEffect(() => {
+    if (remainingSeconds === null) return;
+
+    const originalTitle = document.title;
+
+    const interval = setInterval(() => {
+      setRemainingSeconds((prev) => {
+        if (prev === null || prev <= 1) {
+          document.title = originalTitle;
+          clearInterval(interval);
+          setActiveButton(null);
+          return null;
+        }
+
+        const minutes = Math.floor((prev - 1) / 60);
+        const seconds = (prev - 1) % 60;
+
+        document.title = `${minutes}:${seconds.toString().padStart(2, "0")} — persimmon`;
+
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [remainingSeconds]);
 
   return (
     <>
