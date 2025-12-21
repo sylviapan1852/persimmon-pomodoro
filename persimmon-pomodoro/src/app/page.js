@@ -101,6 +101,8 @@ export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
   const [durationInput, setDurationInput] = useState(durations.join(", "));
   const [task, setTask] = useState("");
+  const [remainingSeconds, setRemainingSeconds] = useState(null);
+
 
 
   const handleClick = (minutes) => {
