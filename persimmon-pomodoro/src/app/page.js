@@ -185,7 +185,7 @@ export default function Home() {
             }}
           >
             <div style={{ fontSize: "14px", marginBottom: "6px", color: "#666" }}>
-              Edit durations (minutes, comma-separated)
+              Edit duration options
             </div>
 
             <input
