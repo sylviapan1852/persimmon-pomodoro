@@ -228,19 +228,26 @@ export default function Home() {
         {/* Cog button */}
         <button
           onClick={() => setShowSettings((v) => !v)}
+          aria-label="Edit durations"
           style={{
             marginLeft: "10px",
-            fontSize: "18px",
-            color: "#999",
             background: "transparent",
             border: "none",
             cursor: "pointer",
+            padding: 0,
           }}
-          aria-label="Edit durations"
         >
-          ⚙️
+          <img
+            src="/cog.png"
+            alt="Edit durations"
+            style={{
+              width: "18px",
+              height: "18px",
+              opacity: 0.6,
+            }}
+          />
         </button>
-      </div>
+
 
       
       {/* 3D Canvas */}
