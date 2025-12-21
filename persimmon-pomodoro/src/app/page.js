@@ -238,7 +238,7 @@ export default function Home() {
           }}
         >
           <img
-            src="/cog.png"
+            src="/icons/cog.png"
             alt="Edit durations"
             style={{
               width: "18px",
@@ -248,6 +248,7 @@ export default function Home() {
           />
         </button>
 
+      </div>
 
       
       {/* 3D Canvas */}
