@@ -331,9 +331,7 @@ export default function Home() {
           whiteSpace: "nowrap",
         }}
         data-placeholder="What are you working on?"
-      >
-        {task}
-      </div>
+      />
 
 
 
