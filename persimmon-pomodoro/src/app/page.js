@@ -10,6 +10,15 @@ function Model({ topRef, animate, reset, resetDuration }) {
   const [topPart, setTopPart] = useState(null);
   const [bottomPart, setBottomPart] = useState(null);
 
+function placeCursorAtEnd(el) {
+  const range = document.createRange();
+  const sel = window.getSelection();
+  range.selectNodeContents(el);
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
   useEffect(() => {
     if (scene && scene.children.length >= 2) {
       const top = scene.children[0]; // Assuming top part is the first child
@@ -100,8 +109,10 @@ export default function Home() {
   const [durations, setDurations] = useState([5, 15, 30]);
   const [showSettings, setShowSettings] = useState(false);
   const [durationInput, setDurationInput] = useState(durations.join(", "));
-  const [task, setTask] = useState("");
+  //const [task, setTask] = useState("");
   const [remainingSeconds, setRemainingSeconds] = useState(null);
+  const ZWSP = "\u200B";
+  const [task, setTask] = useState(ZWSP);
 
 
 
@@ -291,13 +302,20 @@ export default function Home() {
       <div
         contentEditable
         suppressContentEditableWarning
-        dir="rtl"
+        dir="ltr"
         onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault(); // stop new lines
+          if (e.key === "Enter") e.preventDefault();
+        }}
+        onInput={(e) => {
+          const text = e.currentTarget.textContent || "";
+          if (text === "") {
+            e.currentTarget.textContent = ZWSP;
+            setTask(ZWSP);
+            placeCursorAtEnd(e.currentTarget);
+          } else {
+            setTask(text);
           }
         }}
-        onInput={(e) => setTask(e.currentTarget.textContent || "")}
         style={{
           position: "absolute",
           bottom: "14%",
@@ -309,13 +327,13 @@ export default function Home() {
           color: "black",
           cursor: "text",
           outline: "none",
-          whiteSpace: "nowrap",   // 👈 single line
-          overflow: "hidden",     // optional safety
+          whiteSpace: "nowrap",
         }}
         data-placeholder="What are you working on?"
       >
         {task}
       </div>
+
 
 
       
