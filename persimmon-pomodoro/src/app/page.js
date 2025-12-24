@@ -303,6 +303,7 @@ export default function Home() {
         contentEditable
         suppressContentEditableWarning
         dir="ltr"
+        data-has-text={task !== ZWSP}
         onKeyDown={(e) => {
           if (e.key === "Enter") e.preventDefault();
         }}
