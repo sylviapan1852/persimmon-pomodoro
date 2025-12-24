@@ -275,7 +275,7 @@ export default function Home() {
           }}
         >
           <img
-            src="/icons/cog.png"
+            src="cog.png"
             alt="Edit durations"
             style={{
               width: "18px",
@@ -291,6 +291,12 @@ export default function Home() {
       <div
         contentEditable
         suppressContentEditableWarning
+        dir="ltr"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault(); // stop new lines
+          }
+        }}
         onInput={(e) => setTask(e.currentTarget.textContent || "")}
         style={{
           position: "absolute",
@@ -303,13 +309,13 @@ export default function Home() {
           color: "black",
           cursor: "text",
           outline: "none",
-          whiteSpace: "nowrap",
+          whiteSpace: "nowrap",   // 👈 single line
+          overflow: "hidden",     // optional safety
         }}
         data-placeholder="What are you working on?"
       >
         {task}
       </div>
-
 
 
       
