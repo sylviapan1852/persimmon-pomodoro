@@ -291,7 +291,7 @@ export default function Home() {
       <div
         contentEditable
         suppressContentEditableWarning
-        dir="ltr"
+        dir="rtl"
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault(); // stop new lines
